@@ -80,5 +80,6 @@ end
 #   puts "finish"
 # end
 
-load_cocktails(2)
+load_ingredients
+load_cocktails(25)
 
