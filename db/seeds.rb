@@ -29,7 +29,7 @@ def load_random_cocktail
 
   response = open(cocktail_url).read
   cocktail = JSON.parse(response).first.last.first
-  return nil if cocktail["strIngredient11"].length > 0
+  return nil if cocktail["strIngredient11"].length > 0 # TODO: A checker bug
   cocktail_to_load = {}
   cocktail.each do |key, value|
     cocktail_to_load[key] = value unless value.chomp.length ==0 || key == "dateModified"

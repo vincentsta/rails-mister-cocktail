@@ -8,8 +8,8 @@
   padding: 20px;
   border-radius: 5px;
   transition: all 0.15s ease;
-  background-color: white;
-  opacity: 0.9;
+  background-color: $light;
+  opacity: 0.8;
   margin: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   // transition: height 0.3s, margin 0.3s, transform 0.3s 0.3s, opacity 0.2s 0.3s !important;
@@ -35,6 +35,7 @@
   font-weight: bold;
   font-size: 23px;
   margin-top: 0;
+  color: $dark-green;
 }
 .product-body p {
   font-weight: lighter;
@@ -72,6 +73,7 @@
   border-bottom: 9px solid black;
   border-radius: 2px;
   margin: auto;
+  color: $dark-green;
 }
 
 /* Controls design */
@@ -87,7 +89,7 @@
   color: $dark-green;
 }
 .product-controls a:hover {
-  color: $dark !important
+  color: $main-green !important
 }
 .product-controls-hidden a {
   color: transparent;
@@ -98,11 +100,14 @@
 
 /* Hover effects */
 .product:hover {
-  background: $medium;
+  opacity: 1;
   cursor: pointer;
+  h3 {
+    color: $main-green;
+  }
 }
 .product-upvote:hover, .product-upvote.product-upvote-upvoted {
-  color: $dark;
+  color: $main-green;
   cursor: pointer;
 }
 .product-upvote-upvoted .product-arrow {
@@ -112,7 +117,7 @@
 //   transform: scale(1.2)
 // }
 .product:hover .product-controls-hidden a {
-  color: $dark;
+  color: $main-green;
 }
 .product-upvote:hover .product-arrow {
   border-bottom: 9px solid $dark;
