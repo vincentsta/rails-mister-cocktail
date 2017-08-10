@@ -1,0 +1,43 @@
+<div class="product" data-cat= <%= cocktail.name %> >
+  <div class='product-upvote'>
+    <div class="product-arrow"></div>
+    <div class='product-count'>95</div>
+  </div>
+  <%= link_to cocktail_path(cocktail), class: 'product-body' do |el| %>
+    <div>
+      <h3><%= cocktail.name.capitalize %></h3>
+      <p>
+        <% unless @show %>
+          <% cocktail.ingredients.first(3).each do |i|%>
+            <%= i.name %>,
+          <% end %>
+        ...
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+  <% if @show %>
+    <div class="img-wrap">
+      <%= image_tag 'https://unsplash.it/300/200', class: "img-body"%>
+    </div>
+  <% end %>
+  <ul class="list-inline product-controls hidden-sm hidden-xs">
+    <li>
+      <% unless @show %>
+        <%= link_to cocktail_path(cocktail) do |el| %>
+          <i class='fa fa-eye'></i>
+        <% end %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to edit_cocktail_path(cocktail) do |el| %>
+        <i class='fa fa-pencil'></i>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to cocktail_path(cocktail), method: :delete, data: { confirm: "Are you sure?" } do |el| %>
+          <i class='fa fa-trash'></i>
+      <% end %>
+    </li>
+  </ul>
+</div>

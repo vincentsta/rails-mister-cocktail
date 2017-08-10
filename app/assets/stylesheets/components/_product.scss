@@ -1,0 +1,119 @@
+:hover {
+  text-decoration: none !important;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  transition: all 0.15s ease;
+  background-color: white;
+  opacity: 0.9;
+  margin: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  // transition: height 0.3s, margin 0.3s, transform 0.3s 0.3s, opacity 0.2s 0.3s !important;
+}
+
+/* Body design */
+.product-body {
+  flex: 1 1 auto;
+}
+
+.img-wrap {
+  flex: 0 1 300px;
+}
+
+.img-body {
+  height: 200px;
+  background-size: cover;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.product-body h3 {
+  font-weight: bold;
+  font-size: 23px;
+  margin-top: 0;
+}
+.product-body p {
+  font-weight: lighter;
+  color: #dark;
+  margin-bottom: 0;
+}
+
+/* Product image */
+.product-image {
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 175px;
+}
+
+/* Upvote design */
+.product-upvote {
+  padding-right: 20px;
+  text-align: center;
+  transition: all 0.15s ease;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 20px;
+  color: $dark-green;
+}
+.product-count {
+  margin: 2px 0 0;
+}
+.product-arrow {
+  transition: all 0.15s ease;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid transparent;
+  border-bottom: 9px solid black;
+  border-radius: 2px;
+  margin: auto;
+}
+
+/* Controls design */
+.product-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.product-controls a {
+  padding: 0 20px;
+  font-size: 17px;
+  color: $dark-green;
+}
+.product-controls a:hover {
+  color: $dark !important
+}
+.product-controls-hidden a {
+  color: transparent;
+  font-size: 15px;
+  transition: all 0.15s ease;
+  border-color: transparent;
+}
+
+/* Hover effects */
+.product:hover {
+  background: $medium;
+  cursor: pointer;
+}
+.product-upvote:hover, .product-upvote.product-upvote-upvoted {
+  color: $dark;
+  cursor: pointer;
+}
+.product-upvote-upvoted .product-arrow {
+  border-bottom-color: $dark-green;
+}
+// .product:hover .product-upvote {
+//   transform: scale(1.2)
+// }
+.product:hover .product-controls-hidden a {
+  color: $dark;
+}
+.product-upvote:hover .product-arrow {
+  border-bottom: 9px solid $dark;
+}
