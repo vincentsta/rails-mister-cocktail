@@ -1,0 +1,2 @@
+class Cocktailloader < ApplicationRecord
+end
