@@ -29,10 +29,11 @@ def load_random_cocktail
 
   response = open(cocktail_url).read
   cocktail = JSON.parse(response).first.last.first
-  return nil if cocktail["strIngredient11"].length > 0 # TODO: A checker bug
+  return nil unless cocktail["strIngredient11"].nil? || cocktail["strIngredient11"].length == 0 # TODO: A checker bug
+  return nil unless cocktail["strMeasure11"].nil? || cocktail["strMeasure11"].length == 0
   cocktail_to_load = {}
   cocktail.each do |key, value|
-    cocktail_to_load[key] = value unless value.chomp.length ==0 || key == "dateModified"
+    cocktail_to_load[key] = value unless value.nil? || value.chomp.length ==0 || key == "dateModified"
   end
   cocktail_test = Cocktailloader.new(cocktail_to_load)
   cocktail_test.save
@@ -80,6 +81,45 @@ end
 #   puts "finish"
 # end
 
-load_ingredients
-load_cocktails(25)
+# load_ingredients
+# load_cocktails(25)
+
+def upload_photo(cocktail_id)
+  cocktailloader = Cocktailloader.find_by(mrcock_id: cocktail_id)
+  cocktail = Cocktail.find(cocktail_id)
+  img = cocktailloader.strDrinkThumb if cocktailloader
+  cocktail.remote_photo_url = img if img
+  puts "photo saved"
+  cocktail.save
+end
+
+def upload_category(cocktail_id)
+  cocktailloader = Cocktailloader.find_by(mrcock_id: cocktail_id)
+  cocktail = Cocktail.find(cocktail_id)
+  category = cocktailloader.strCategory if cocktailloader
+  cocktail.category = category if category
+  puts "category saved"
+  cocktail.save
+end
+
+def votes(cocktail_id)
+  cocktail = Cocktail.find(cocktail_id)
+  cocktail.votes = rand(0..100)
+  cocktail.save
+  puts "votes saved"
+end
+
+def update
+  cocktails = Cocktail.all
+  cocktails.each do |cocktail|
+    upload_photo(cocktail.id)
+    upload_category(cocktail.id)
+    votes(cocktail.id)
+  end
+end
+
+load_cocktails(50)
+update
+
+
 

@@ -11,3 +11,19 @@
     <% end %>
   </div>
 </div>
+
+
+<% content_for(:js) do %>
+  <script>
+    var upvotes = document.querySelectorAll(".product-upvote")
+    upvotes.forEach((el) => {
+      el.addEventListener("click", (event) => {
+        let votes = Number.parseInt(el.dataset.votes, 10);
+        el.querySelector(".product-count").innerText = votes + 1 ;
+        let id = el.dataset.id;
+        fetch(`/cocktails/${id}/upvote/`)
+      });
+    })
+  </script>
+<% end %>
+

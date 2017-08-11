@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Mister Cocktail</title>
+    <link rel="icon" href= <%= image_path "logo.png" %> type="image/png">
     <%= csrf_meta_tags %>
     <!-- Add these line for detecting device width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,5 +21,7 @@
       </div>
     </div>
     <%= render 'shared/footer' %>
+    <%= javascript_include_tag 'application' %>
+    <%= yield(:js) %>
   </body>
 </html>

@@ -1,43 +1,71 @@
-<div class="product" data-cat= <%= cocktail.name %> >
-  <div class='product-upvote'>
-    <div class="product-arrow"></div>
-    <div class='product-count'>95</div>
-  </div>
-  <%= link_to cocktail_path(cocktail), class: 'product-body' do |el| %>
-    <div>
-      <h3><%= cocktail.name.capitalize %></h3>
-      <p>
+<% if @home %>
+  <% if hidden %>
+    <div class="product-home hide-el" data-name= <%= cocktail.name %> data-cat= <%= cocktail.category %> data-id = <%= cocktail.id %> >
+  <% else %>
+    <div class="product-home" data-name= <%= cocktail.name %> data-cat= <%= cocktail.category %> data-id = <%= cocktail.id %> >
+  <% end %>
+      <div class="product-content">
+        <div class="img-home">
+          <%= link_to cocktail_path(cocktail) do |el| %>
+            <% unless cocktail.photo.url.nil? %>
+              <%= image_tag cocktail.photo.url(:standard), class: "img-home-content"%>
+            <% end %>
+          <% end %> <!-- for link_to -->
+        </div>
+        <div class="product-desc">
+          <div class="product-body-home">
+            <%= link_to cocktail_path(cocktail) do |el| %>
+              <h3><%= cocktail.name.capitalize %></h3>
+              <p><%= cocktail.category %></p>
+            <% end %> <!-- for link_to -->
+          </div>
+          <div class='product-upvote' data-id = <%= cocktail.id %> data-votes = <%= cocktail.votes %> >
+            <div class="product-arrow"></div>
+            <div class='product-count'><%= cocktail.votes %></div>
+          </div>
+        </div>
+       </div>
+    </div>
+
+<% else %>
+  <div class="product" data-name= <%= cocktail.name %> data-cat= <%= cocktail.category %> data-id = <%= cocktail.id %> >
+    <div class='product-upvote' data-id = <%= cocktail.id %> data-votes = <%= cocktail.votes %> >
+      <div class="product-arrow"></div>
+      <div class='product-count'><%= cocktail.votes %></div>
+    </div>
+    <%= link_to cocktail_path(cocktail), class: 'product-body' do |el| %>
+      <div>
+        <h3><%= cocktail.name.capitalize %></h3>
+        <p><%= cocktail.category %></p>
+      </div>
+    <% end %>
+    <% if @show %>
+      <div class="img-wrap">
+        <% unless cocktail.photo.url.nil? %>
+          <%= image_tag cocktail.photo.url(:standard)
+          # cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill, class: "img-body"
+          %>
+        <% end %>
+      </div>
+    <% end %>
+    <ul class="list-inline product-controls hidden-sm hidden-xs">
+      <li>
         <% unless @show %>
-          <% cocktail.ingredients.first(3).each do |i|%>
-            <%= i.name %>,
+          <%= link_to cocktail_path(cocktail) do |el| %>
+            <i class='fa fa-eye'></i>
           <% end %>
-        ...
         <% end %>
-      </p>
-    </div>
-  <% end %>
-  <% if @show %>
-    <div class="img-wrap">
-      <%= image_tag 'https://unsplash.it/300/200', class: "img-body"%>
-    </div>
-  <% end %>
-  <ul class="list-inline product-controls hidden-sm hidden-xs">
-    <li>
-      <% unless @show %>
-        <%= link_to cocktail_path(cocktail) do |el| %>
-          <i class='fa fa-eye'></i>
+      </li>
+      <li>
+        <%= link_to edit_cocktail_path(cocktail) do |el| %>
+          <i class='fa fa-pencil'></i>
         <% end %>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to edit_cocktail_path(cocktail) do |el| %>
-        <i class='fa fa-pencil'></i>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to cocktail_path(cocktail), method: :delete, data: { confirm: "Are you sure?" } do |el| %>
-          <i class='fa fa-trash'></i>
-      <% end %>
-    </li>
-  </ul>
-</div>
+      </li>
+      <li>
+        <%= link_to cocktail_path(cocktail), method: :delete do |el| %>
+            <i class='fa fa-trash'></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+<% end %>

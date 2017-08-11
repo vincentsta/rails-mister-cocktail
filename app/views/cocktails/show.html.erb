@@ -9,7 +9,7 @@
 <div class="row">
   <div class="cocktail-content">
     <div class="col-xs-12 col-sm-10 col-md-offset-1">
-      <%= render "cocktails/listel", cocktail: @cocktail  %>
+      <%= render "cocktails/listel", cocktail: @cocktail %>
     </div>
   </div>
 </div>
@@ -29,7 +29,7 @@
             <% @cocktail.doses.each do |dose| %>
               <div class="list-group-item">
                 <p class="list-group-item-text ingredient-item">
-                  <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete, data: { confirm: "Are you sure?" } do |el| %>
+                  <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete do |el| %>
                     <i class='fa fa-trash'></i>
                   <% end %>
                   <%= "#{dose.ingredient.name}: #{dose.description}" %>
@@ -45,3 +45,15 @@
     </div>
   </div>
 </div>
+
+<% content_for(:js) do %>
+  <script>
+    var el = document.querySelector(".product-upvote")
+      el.addEventListener("click", (event) => {
+        let votes = Number.parseInt(el.dataset.votes, 10);
+        el.querySelector(".product-count").innerText = votes + 1 ;
+        let id = el.dataset.id;
+        fetch(`/cocktails/${id}/upvote/`)
+      });
+  </script>
+<% end %>

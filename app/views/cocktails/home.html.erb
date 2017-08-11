@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path 'background.jpg'%>)">
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= cl_image_path("ammutbgyib227iyefzz3.jpg")%>)">
   <div class="banner-content">
     <h1>Mister Cocktail</h1>
     <p>The best cocktails in town</p>
@@ -10,11 +10,41 @@
   <div id="top-cocktails" class="text-center page-title"><h1>Top cocktails</h1></div>
   <div class="container">
     <div class="row">
+      <% i = 0 %>
       <% @cocktails.each do |el| %>
         <div class="col-xs-6 col-md-4 col-lg-3">
-          <%= render 'listel', cocktail: el %>
+          <% i += 1 %>
+          <%= render 'listel', cocktail: el, hidden: i > @nb_visible %>
         </div>
       <% end %>
+      <div class="col-xs-6 col-md-4 col-lg-3 text-center">
+        <div class="btn btn-info btn-lg text-center" id="more-cocktails">
+          See more cocktails
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<% content_for(:js) do %>
+  <script>
+    var btnMore = document.getElementById("more-cocktails")
+    btnMore.addEventListener("click", (event) => {
+      event.target.classList.add("hide-el");
+      document.querySelectorAll(".product-home").forEach((el) => {
+        el.classList.remove("hide-el");
+      })
+    });
+
+    var upvotes = document.querySelectorAll(".product-upvote")
+    upvotes.forEach((el) => {
+      el.addEventListener("click", (event) => {
+        let votes = Number.parseInt(el.dataset.votes, 10);
+        el.querySelector(".product-count").innerText = votes + 1 ;
+        let id = el.dataset.id;
+        fetch(`/cocktails/${id}/upvote/`)
+      });
+    })
+  </script>
+<% end %>
+
