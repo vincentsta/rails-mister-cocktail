@@ -1,6 +1,12 @@
 class CocktailsController < ApplicationController
-
+  layout "homelayout", only: [ :home ]
   before_action :set_cocktail, only: [:show, :edit, :update, :destroy]
+
+  def home
+    @cocktails = Cocktail.all
+    @nb_visible = 5
+  end
+
   def index
     @cocktails = Cocktail.all
   end

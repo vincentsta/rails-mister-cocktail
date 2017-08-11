@@ -1,1 +1,20 @@
-<h1>Welcome to mister cocktail</h1>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path 'background.jpg'%>)">
+  <div class="banner-content">
+    <h1>Mister Cocktail</h1>
+    <p>The best cocktails in town</p>
+    <a href="#top-cocktails" class="btn btn-primary btn-lg">Start now</a>
+  </div>
+</div>
+
+<div class="main-wrapper">
+  <div id="top-cocktails" class="text-center page-title"><h1>Top cocktails</h1></div>
+  <div class="container">
+    <div class="row">
+      <% @cocktails.each do |el| %>
+        <div class="col-xs-6 col-md-4 col-lg-3">
+          <%= render 'listel', cocktail: el %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
