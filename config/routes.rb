@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     end
     resources :doses, only: [ :create, :new, :destroy ]
   end
+
+  resources :ingredients, only: [ :index ]
 end

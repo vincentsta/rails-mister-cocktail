@@ -23,3 +23,23 @@ body {
 .list-group {
   margin-top: 40px;
 }
+
+.ingredient-item {
+  margin: 20px;
+  padding: 20px;
+  background-color: $light;
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+.ingredient-item:hover {
+  opacity: 1;
+  h4 {
+    color: $main-green;
+  }
+}
+
+.ingredient-item a:hover {
+  color: $main-green !important;
+  cursor: pointer;
+}

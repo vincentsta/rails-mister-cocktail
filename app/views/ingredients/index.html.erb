@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h2 class="page-title">Cocktails by ingredient</h2>
+  </div>
+  <div class="col-xs-6 text-right">
+    <p><%= link_to "Back to home", root_path, class: "btn btn-primary btn-sm" %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="list-group">
+    <% @ingredients.each do |ingredient| %>
+      <div class="col-xs-6 col-sm-4">
+        <div class="ingredient-item">
+          <h4 class="list-group-item-heading"><%= ingredient.name %></h4>
+          <% ingredient.doses.each do |dose| %>
+            <p class="list-group-item-text">
+              <% cocktail = dose.cocktail %>
+              <%= link_to cocktail.name, cocktail_path(cocktail) if cocktail %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
