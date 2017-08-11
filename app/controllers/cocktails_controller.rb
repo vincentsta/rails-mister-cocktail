@@ -33,6 +33,7 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new(cocktail_params)
     @cocktail.votes = "0"
     if @cocktail.save
+      flash[:notice] = "Cocktail #{@cocktail.name} has been created"
       redirect_to cocktail_path(@cocktail)
     else
       render :new
